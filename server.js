@@ -9,10 +9,8 @@ app.get('/', (req,res) => {
   res.sendFile(__dirname + '/client/build/index.html')
 })
 
-
-
 // mongoose.Promise = global.Promise;
-// mongoose.connect(process.env.MONGODB_URI); //mongodb://localhost/idea-board
+// mongoose.connect(process.env.MONGODB_URI); //mongodb://localhost/cognitive-auth
 
 // const connection = mongoose.connection;
 // connection.on('connected', () => {

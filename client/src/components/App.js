@@ -1,21 +1,43 @@
-import React, { Component } from 'react';
-import logo from '../logo.svg';
-import '../App.css';
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import { addPhrase } from '../actions/exampleActions'
 
 class App extends Component {
-  render() {
+  state = {
+    formValue: ''
+  }
+
+  handleChange = (event) => {
+    this.setState({ formValue: event.target.value })
+  }
+  handleButtonPress = () => {
+    this.props.addPhrase(this.state.formValue)
+  }
+
+  render () {
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+        React/Redux Boilerplate Up and Running
+        <div>
+          <input
+            type="text"
+            placeholder='write something here'
+            onChange={this.handleChange}
+            value={this.state.formValue}/>
+          <button onClick={this.handleButtonPress}>Add a phrase</button>
+        </div>
+
+        {this.props.phrases.map((phrase, i) =>
+          <p key={i}>{phrase}</p>
+        )}
       </div>
-    );
+    )
   }
 }
 
-export default App;
+const mapStateToProps = (state) => {
+  return {
+    phrases: state.example
+  }
+}
+export default connect(mapStateToProps, { addPhrase })(App)
